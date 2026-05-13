@@ -25,7 +25,7 @@ namespace RoyalVillaWeb.Services
                 var client = _httpClient.CreateClient("RoyalVillaAPI"); // "RoyalVillaAPI" is the name of the HttpClient configured in Program.cs
                 var message = new HttpRequestMessage
                 {
-                    RequestUri = new Uri(apiRequest.Url), // Set the request URI from the ApiRequest
+                    RequestUri = new Uri(apiRequest.Url, UriKind.Relative), // Set the request URI from the ApiRequest
                     Method = GetHttpMethod(apiRequest.ApiType)
                 }; // Create a new HttpRequestMessage
 
