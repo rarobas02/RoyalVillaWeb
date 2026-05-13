@@ -10,7 +10,6 @@ namespace RoyalVillaWeb.Services
         private const string APIEndpoint = "/api/villa";
         public VillaService(IHttpClientFactory httpClient, IConfiguration configuration, string villUrl) : base(httpClient)
         {
-            _villUrl = configuration.GetValue<string>("ServiceUrls:VillaAPI");
         }
         public Task<T?> CreateAsync<T>(VillaCreateDTO dto, string token)
         {
@@ -18,7 +17,7 @@ namespace RoyalVillaWeb.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = $"{_villUrl}{APIEndpoint}",
+                Url = $"{APIEndpoint}",
                 Token = token
             });
         }
@@ -27,7 +26,7 @@ namespace RoyalVillaWeb.Services
             return SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = $"{_villUrl}{APIEndpoint}/{id}",
+                Url = $"{APIEndpoint}/{id}",
                 Token = token
             });
         }
@@ -36,7 +35,7 @@ namespace RoyalVillaWeb.Services
             return SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.GET,
-                Url = $"{_villUrl}{APIEndpoint}",
+                Url = $"{APIEndpoint}",
                 Token = token
             });
         }
@@ -45,7 +44,7 @@ namespace RoyalVillaWeb.Services
             return SendAsync<T>(new ApiRequest
             {
                 ApiType = SD.ApiType.POST,
-                Url = $"{_villUrl}{APIEndpoint}/{id}",
+                Url = $"{APIEndpoint}/{id}",
                 Token = token
             });
         }
@@ -55,7 +54,7 @@ namespace RoyalVillaWeb.Services
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = $"{_villUrl}{APIEndpoint}/{dto.id}",
+                Url = $"{APIEndpoint}/{dto.Id}",
                 Token = token
             });
         }
