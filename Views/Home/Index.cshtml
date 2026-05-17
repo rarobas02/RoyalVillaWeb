@@ -71,22 +71,25 @@
             </div>
         </div>
     </div>
-
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="bi bi-exclamation-triangle-fill"></i> @TempData["error"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-info text-center" role="alert">
-                <i class="bi bi-info-circle-fill fs-1 d-block mb-3"></i>
-                <h4>No Villas Available</h4>
-                <p class="mb-0">There are currently no villas to display. Please check back later!</p>
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i>@TempData["error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (Model is null || !Model.Any())
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="bi bi-info-circle-fill fs-1 d-block mb-3"></i>
+                    <h4>No Villas Available</h4>
+                    <p class="mb-0">There are currently no villas to display. Please check back later!</p>
+                </div>
             </div>
         </div>
-    </div>
-
+    }
     <!-- Villa Cards Grid -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         <div class="col">
@@ -142,7 +145,6 @@
 
             </div>
         </div>
-        }
     </div>
 
     <!-- Statistics Section -->
@@ -185,7 +187,6 @@
             </div>
         </div>
     </div>
-    }
 </div>
 
 <!-- Custom Styles -->
@@ -211,6 +212,7 @@
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -253,10 +255,10 @@
         border-radius: 15px;
     }
 
-    .hover-shadow:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 1.5rem 4rem rgba(0,0,0,.2) !important;
-    }
+        .hover-shadow:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 1.5rem 4rem rgba(0,0,0,.2) !important;
+        }
 
     .villa-image {
         transition: transform 0.5s ease-in-out;
@@ -283,10 +285,10 @@
         transition: all 0.3s ease;
     }
 
-    .btn-hover:hover {
-        transform: scale(1.02);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
+        .btn-hover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
 
     /* Stats Card */
     .stats-card {
@@ -299,9 +301,9 @@
         transition: transform 0.3s ease;
     }
 
-    .stat-item:hover {
-        transform: translateY(-5px);
-    }
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
 
     /* Background Gradient */
     .bg-gradient-primary {

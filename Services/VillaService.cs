@@ -6,9 +6,8 @@ namespace RoyalVillaWeb.Services
 {
     public class VillaService : BaseService, IVillaService
     {
-        private readonly string _villUrl;
         private const string APIEndpoint = "/api/villa";
-        public VillaService(IHttpClientFactory httpClient, IConfiguration configuration, string villUrl) : base(httpClient)
+        public VillaService(IHttpClientFactory httpClient, IConfiguration configuration) : base(httpClient)
         {
         }
         public Task<T?> CreateAsync<T>(VillaCreateDTO dto, string token)
@@ -17,7 +16,7 @@ namespace RoyalVillaWeb.Services
             {
                 ApiType = SD.ApiType.POST,
                 Data = dto,
-                Url = $"{APIEndpoint}",
+                Url = APIEndpoint,
                 Token = token
             });
         }
