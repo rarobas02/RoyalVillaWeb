@@ -114,7 +114,7 @@
                             <!-- Price Badge -->
                             <div class="position-absolute top-0 end-0 m-3">
                                 <span class="badge bg-success fs-6 px-3 py-2 rounded-pill shadow">
-                                    $@villa.Rate.ToString("N0")/night
+                                    $@villa.Rate.ToString("N0")/night @* // `N0` just formats the string*@
                                 </span>
                             </div>
                         </div>
@@ -132,13 +132,13 @@
                                 <div class="row g-2">
                                     <div class="col-6">
                                         <div class="d-flex align-items-center">
-                                            <i class="bi bi-people-fill text-primary"></i>
+                                            <i class="bi bi-people-fill m-1"></i>
                                             <small class="text-muted">@villa.Occupancy Guest</small>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="d-flex align-items-center float-end">
-                                            <i class="bi bi-square-fill text-primary me-2"></i>
+                                            <i class="bi bi-house m-1"></i>
                                             <small class="text-muted">@villa.Sqft sqft</small>
                                         </div>
                                     </div>
