@@ -20,27 +20,32 @@ namespace RoyalVillaWeb.Services
         }
         public async Task<T?> SendAsync<T>(ApiRequest apiRequest)
         {
-            try
+            var client = _httpClient.CreateClient("RoyalVillaAPI");
+            using var message = new HttpRequestMessage
             {
-                var client = _httpClient.CreateClient("RoyalVillaAPI"); // "RoyalVillaAPI" is the name of the HttpClient configured in Program.cs
-                var message = new HttpRequestMessage
-                {
-                    RequestUri = new Uri(apiRequest.Url, UriKind.Relative), // Set the request URI from the ApiRequest
-                    Method = GetHttpMethod(apiRequest.ApiType)
-                }; // Create a new HttpRequestMessage
+                RequestUri = new Uri(apiRequest.Url, UriKind.Relative),
+                Method = GetHttpMethod(apiRequest.ApiType)
+            };
 
-                if(apiRequest.Data != null)
-                {
-                    message.Content = JsonContent.Create(apiRequest.Data, options: JsonOptions);
-                } // If there is data to send, serialize it to JSON and set it as the content of the request
-                var apiResponse = await client.SendAsync(message); // Send the HTTP request and await the response
-                return await apiResponse.Content.ReadFromJsonAsync<T>(JsonOptions); // Read the response content as JSON and deserialize it to the specified type T
-            }
-            catch (Exception ex)
+            if(apiRequest.Data != null)
             {
-                Console.WriteLine($"Unexpected Error: {ex.Message}");
-                return default;
+                message.Content = JsonContent.Create(apiRequest.Data, options: JsonOptions);
             }
+
+            var apiResponse = await client.SendAsync(message);
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                var errorContent = await apiResponse.Content.ReadAsStringAsync();
+                throw new HttpRequestException($"Request failed with status code {(int)apiResponse.StatusCode}: {apiResponse.ReasonPhrase}. Response: {errorContent}");
+            }
+
+            var result = await apiResponse.Content.ReadFromJsonAsync<T>(JsonOptions);
+            if (result is null)
+            {
+                throw new InvalidOperationException("Response content was empty or could not be deserialized.");
+            }
+
+            return result;
         }
         private static HttpMethod GetHttpMethod(SD.ApiType apiType)
         {
