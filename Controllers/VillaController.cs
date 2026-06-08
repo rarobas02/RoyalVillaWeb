@@ -37,5 +37,28 @@ namespace RoyalVillaWeb.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(VillaCreateDTO createDTO)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(createDTO);
+            }
+            try
+            {
+                var response = await _villaService.CreateAsync<ApiResponse<VillaDTO>>(createDTO, ""); //the blank string in the parameter is for the token,
+                if (response is not null && response.Data is not null)
+                {
+                    TempData["success"] = "Villa created successfully";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = $"An error occured: {ex.Message}";
+            }
+            return View(createDTO);
+        }
     }
 }
