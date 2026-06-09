@@ -42,7 +42,7 @@ namespace RoyalVillaWeb.Services
         {
             return SendAsync<T>(new ApiRequest
             {
-                ApiType = SD.ApiType.POST,
+                ApiType = SD.ApiType.GET,
                 Url = $"{APIEndpoint}/{id}",
                 Token = token
             });
