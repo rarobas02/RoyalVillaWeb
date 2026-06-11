@@ -40,15 +40,15 @@ namespace RoyalVillaWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VillaCreateDTO createDTO)
+        public async Task<IActionResult> Create(VillaDTO villaDTO)
         {
             if(!ModelState.IsValid)
             {
-                return View(createDTO);
+                return View(villaDTO);
             }
             try
             {
-                var response = await _villaService.CreateAsync<ApiResponse<VillaDTO>>(createDTO, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.DeleteAsync<ApiResponse<object>>(villaDTO.Id, ""); //the blank string in the parameter is for the token,
                 if (response is not null && response.Data is not null)
                 {
                     TempData["success"] = "Villa created successfully";
@@ -59,7 +59,7 @@ namespace RoyalVillaWeb.Controllers
             {
                 TempData["error"] = $"An error occured: {ex.Message}";
             }
-            return View(createDTO);
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id)
         {
@@ -84,26 +84,25 @@ namespace RoyalVillaWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id, VillaDTO createDTO)
+        public async Task<IActionResult> Delete(VillaDTO villaDTO)
         {
             if (!ModelState.IsValid)
             {
-                return View(createDTO);
+                return View(villaDTO);
             }
             try
             {
-                var response = await _villaService.DeleteAsync<ApiResponse<VillaDTO>>(id, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.DeleteAsync<ApiResponse<object>>(villaDTO.Id, ""); //the blank string in the parameter is for the token,
                 if (response is not null && response.Data is not null)
                 {
                     TempData["success"] = "Villa deleted successfully";
-                    return RedirectToAction(nameof(Index));
                 }
             }
             catch (Exception ex)
             {
                 TempData["error"] = $"An error occured: {ex.Message}";
             }
-            return View(createDTO);
+            return View(nameof(Index));
         }
     }
 }
