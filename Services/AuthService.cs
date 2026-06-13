@@ -1,4 +1,7 @@
-﻿using RoyalVilla.DTO;
+﻿using Humanizer;
+using NuGet.Common;
+using RoyalVilla.DTO;
+using RoyalVillaWeb.Models;
 using RoyalVillaWeb.Services.IServices;
 
 namespace RoyalVillaWeb.Services
@@ -12,12 +15,22 @@ namespace RoyalVillaWeb.Services
 
         public Task<T?> LoginAsync<T>(LoginRequestDTO loginRequestDTO)
         {
-            throw new NotImplementedException();
+            return SendAsync<T>(new ApiRequest
+            {
+                ApiType = SD.ApiType.POST,
+                Data = loginRequestDTO,
+                Url = APIEndpoint + "/login"
+            });
         }
 
         public Task<T?> RegisterAsync<T>(RegistrationRequestDTO registerRequestDTO)
         {
-            throw new NotImplementedException();
+            return SendAsync<T>(new ApiRequest
+            {
+                ApiType = SD.ApiType.POST,
+                Data = registerRequestDTO,
+                Url = APIEndpoint + "/register"
+            });
         }
     }
 }
