@@ -1,4 +1,5 @@
 ﻿@model RoyalVilla.DTO.VillaDTO
+
 <div class="container my-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -6,7 +7,7 @@
             <!-- Form Card -->
             <div class="card">
                 <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
-                    <span class="fw-semibold h-4 pt-1">Delete Villa</span>
+                    <span class="fw-semibold h4 pt-1">Delete Villa</span>
                 </div>
                 <div class="card-body">
                     <form method="post">
@@ -16,12 +17,12 @@
                             <label asp-for="Name" class="form-label">
                                 Villa Name <span class="text-danger">*</span>
                             </label>
-                            <input asp-for="Name" class="form-control" placeholder="Enter villa name" />
+                            <input asp-for="Name" disabled class="form-control" placeholder="Enter villa name" />
                         </div>
                         <!-- Details -->
                         <div class="mb-3">
                             <label asp-for="Details" class="form-label">Description</label>
-                            <textarea asp-for="Details" class="form-control" rows="4"
+                            <textarea asp-for="Details" disabled class="form-control" rows="4"
                                       placeholder="Describe the villa"></textarea>
                         </div>
                         <!-- Rate and Occupancy -->
@@ -34,7 +35,6 @@
                                     <span class="input-group-text">$</span>
                                     <input asp-for="Rate" disabled type="number" step="0.01" class="form-control" placeholder="0.00" />
                                 </div>
-                                <span asp-validation-for="Rate" class="text-danger small"></span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Occupancy" class="form-label">Max Occupancy</label>
@@ -45,7 +45,7 @@
                         <!-- Sqft -->
                         <div class="mb-3">
                             <label asp-for="Sqft" class="form-label">Square Feet</label>
-                            <input asp-for="Sqft" type="number" disabled class="form-control" placeholder="Area in sqft" />
+                            <input asp-for="Sqft" disabled type="number" class="form-control" placeholder="Area in sqft" />
                         </div>
 
                         <!-- Image URL -->
@@ -56,9 +56,10 @@
                         @if (!string.IsNullOrEmpty(Model.ImageUrl))
                         {
                             <div class="text-center mb-4">
-                                <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid" style="max-height: 350px" />
+                                <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded" style="max-height: 350px;">
                             </div>
                         }
+
                         <!-- Action Buttons -->
                         <div class="d-flex gap-2 justify-content-end">
                             <a asp-action="Index" class="btn btn-secondary">Cancel</a>
@@ -68,12 +69,15 @@
                         </div>
 
 
+                       
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
