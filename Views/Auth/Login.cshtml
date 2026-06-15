@@ -7,7 +7,6 @@
                 <i class="bi bi-check-circle-fill me-2"></i> SUCCESS
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-
             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                 <i class="bi bi-exclamation-triangle-fill me-2"></i> ERROR
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -18,25 +17,14 @@
                     <!-- Header -->
                     <div class="text-center mb-4">
                         <div class="mb-3">
-                            <i class="bi bi-person-plus-fill text-success display-1"></i>
+                            <i class="bi bi-person-circle text-primary display-1"></i>
                         </div>
-                        <h3 class="fw-bold text-primary mb-2">Create Account</h3>
-                        <p class="text-muted">Join our exclusive villa community</p>
+                        <h3 class="fw-bold text-primary mb-2">Welcome Back</h3>
+                        <p class="text-muted">Sign in to your account</p>
                     </div>
 
-                    <!-- Register Form -->
+                    <!-- Login Form -->
                     <form method="post">
-                        <div class="text-danger mb-3"></div>
-
-                        <!-- Name Field -->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" placeholder="Full Name" />
-                            <label class="form-label">
-                                <i class="bi bi-person me-2"></i>Full Name
-                            </label>
-                            <span class="text-danger"></span>
-                        </div>
-
                         <!-- Email Field -->
                         <div class="form-floating mb-3">
                             <input class="form-control" placeholder="name@example.com" />
@@ -47,7 +35,7 @@
                         </div>
 
                         <!-- Password Field -->
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-4">
                             <input class="form-control" placeholder="Password" type="password" />
                             <label class="form-label">
                                 <i class="bi bi-lock me-2"></i>Password
@@ -55,22 +43,11 @@
                             <span class="text-danger"></span>
                         </div>
 
-                        <!-- Role Field -->
-                        <div class="form-floating mb-4">
-                            <select class="form-select">
-                                <option selected>Customer</option>
-                                <option>Admin</option>
-                            </select>
-                            <label class="form-label">
-                                <i class="bi bi-shield-check me-2"></i>Account Type
-                            </label>
-                            <span class="text-danger"></span>
-                        </div>
 
                         <!-- Submit Button -->
                         <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-success btn-lg">
-                                <i class="bi bi-check-circle me-2"></i>Create Account
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
                             </button>
                         </div>
 
@@ -81,11 +58,11 @@
                         </div>
                         <hr class="my-4">
 
-                        <!-- Login Link -->
+                        <!-- Register Link -->
                         <div class="text-center">
-                            <p class="mb-3 text-muted">Already have an account?</p>
+                            <p class="mb-3 text-muted">Don't have an account?</p>
                             <a href="#" class="btn btn-outline-primary">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Sign In Instead
+                                <i class="bi bi-person-plus me-2"></i>Create Account
                             </a>
                         </div>
                     </form>
