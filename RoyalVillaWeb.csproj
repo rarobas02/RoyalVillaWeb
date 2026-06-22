@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RoyalVilla.DTO\RoyalVilla.DTO.csproj" />
-    <ProjectReference Include="..\RoyalVilla_API\RoyalVilla_API.csproj" />
   </ItemGroup>
 
 </Project>
