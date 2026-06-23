@@ -1,8 +1,13 @@
 ﻿using AutoMapper;
-using Azure;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RoyalVilla.DTO;
 using RoyalVillaWeb.Services.IServices;
+using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.InteropServices;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace RoyalVillaWeb.Controllers
 {
@@ -27,10 +32,22 @@ namespace RoyalVillaWeb.Controllers
             try
             {
                 var response = await _authService.LoginAsync<ApiResponse<LoginResponseDTO>>(loginRequestDTO); //the blank string in the parameter is for the token,
-                if (response is not null && response.Data is not null)
+                if (response is not null && response.Success && response.Data is not null)
                 {
-                    LoginResponseDTO loginResponse = response.Data;
-                }
+                    LoginResponseDTO model = response.Data;
+                    var handler = new JwtSecurityTokenHandler();
+                    var jwt = handler.ReadJwtToken(model.Token);
+
+                    var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+                    //data from the token extract
+                    identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "email").Value));
+                    identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
+                    var principal = new ClaimsPrincipal(identity);
+
+                    //handles authentication cookie creation and management
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    return RedirectToAction("Index", "Home");
+                }   
             }
             catch (Exception ex)
             {
