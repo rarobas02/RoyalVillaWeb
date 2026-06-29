@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RoyalVilla.DTO;
+using RoyalVillaWeb.Models;
 using RoyalVillaWeb.Services.IServices;
 using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.InteropServices;
@@ -46,6 +47,7 @@ namespace RoyalVillaWeb.Controllers
 
                     //handles authentication cookie creation and management
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                    HttpContext.Session.SetString(SD.SessionToken, model.Token); // store the token in session for future API calls
                     return RedirectToAction("Index", "Home");
                 }   
             }

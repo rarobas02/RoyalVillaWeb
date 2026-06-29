@@ -7,6 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor(); //add HttpContextAccessor to access HttpContext in services
+builder.Services.AddDistributedMemoryCache();// Add distributed memory cache for session storage
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set the session timeout
+    options.Cookie.HttpOnly = true; // Make the session cookie HTTP-only
+    options.Cookie.IsEssential = true; // Make the session cookie essential
+});
 builder.Services.AddAutoMapper(o =>
 {
     o.CreateMap<VillaDTO, VillaCreateDTO>().ReverseMap();
@@ -41,6 +49,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseSession(); // Use the session middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
