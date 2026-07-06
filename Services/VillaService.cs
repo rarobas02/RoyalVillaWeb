@@ -7,7 +7,7 @@ namespace RoyalVillaWeb.Services
     public class VillaService : BaseService, IVillaService
     {
         private const string APIEndpoint = "/api/villa";
-        public VillaService(IHttpClientFactory httpClient, IConfiguration configuration) : base(httpClient)
+        public VillaService(IHttpClientFactory httpClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(httpClient, httpContextAccessor)
         {
         }
         public Task<T?> CreateAsync<T>(VillaCreateDTO dto, string token)
