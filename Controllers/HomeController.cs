@@ -22,7 +22,7 @@ namespace RoyalVillaWeb.Controllers
             List<VillaDTO> villaList = new();
             try
             {
-                var response = await _villaService.GetAllAsync<ApiResponse<List<VillaDTO>>>(""); //the blank string in the parameter is for the token,
+                var response = await _villaService.GetAllAsync<ApiResponse<List<VillaDTO>>>(); //the blank string in the parameter is for the token,
                 if(response is not null && response.Data is not null)
                 {
                     villaList = response.Data;

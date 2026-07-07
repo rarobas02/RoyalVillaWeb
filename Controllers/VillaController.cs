@@ -23,7 +23,7 @@ namespace RoyalVillaWeb.Controllers
             List<VillaDTO> villaList = new();
             try
             {
-                var response = await _villaService.GetAllAsync<ApiResponse<List<VillaDTO>>>(""); //the blank string in the parameter is for the token,
+                var response = await _villaService.GetAllAsync<ApiResponse<List<VillaDTO>>>(); //the blank string in the parameter is for the token,
                 if(response is not null && response.Data is not null)
                 {
                     villaList = response.Data;
@@ -50,7 +50,7 @@ namespace RoyalVillaWeb.Controllers
             }
             try
             {
-                var response = await _villaService.DeleteAsync<ApiResponse<object>>(villaDTO.Id, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.DeleteAsync<ApiResponse<object>>(villaDTO.Id); //the blank string in the parameter is for the token,
                 if (response is not null && response.Data is not null)
                 {
                     TempData["success"] = "Villa created successfully";
@@ -72,7 +72,7 @@ namespace RoyalVillaWeb.Controllers
             }
             try
             {
-                var response = await _villaService.GetAsync<ApiResponse<VillaDTO>>(id, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.GetAsync<ApiResponse<VillaDTO>>(id); //the blank string in the parameter is for the token,
                 if (response is not null && response.Data is not null)
                 {
                     return View(_mapper.Map<VillaUpdateDTO>(response.Data));
@@ -91,7 +91,7 @@ namespace RoyalVillaWeb.Controllers
         {
             try
             {
-                var response = await _villaService.UpdateAsync<ApiResponse<object>>(villaUpdateDTO, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.UpdateAsync<ApiResponse<object>>(villaUpdateDTO); //the blank string in the parameter is for the token,
                 if (response is not null && response.Data is not null)
                 {
                     TempData["success"] = "Villa Updated successfully";
@@ -112,7 +112,7 @@ namespace RoyalVillaWeb.Controllers
             }
             try
             {
-                var response = await _villaService.GetAsync<ApiResponse<VillaDTO>>(id, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.GetAsync<ApiResponse<VillaDTO>>(id); //the blank string in the parameter is for the token,
                 if (response is not null && response.Data is not null)
                 {
                     return View(response.Data);
@@ -135,7 +135,7 @@ namespace RoyalVillaWeb.Controllers
             }
             try
             {
-                var response = await _villaService.DeleteAsync<ApiResponse<object>>(villaDTO.Id, ""); //the blank string in the parameter is for the token,
+                var response = await _villaService.DeleteAsync<ApiResponse<object>>(villaDTO.Id); 
                 if (response is not null && response.Data is not null)
                 {
                     TempData["success"] = "Villa deleted successfully";
