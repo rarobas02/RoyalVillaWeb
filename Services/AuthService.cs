@@ -8,7 +8,7 @@ namespace RoyalVillaWeb.Services
 {
     public class AuthService : BaseService, IAuthService
     {
-        private const string APIEndpoint = "/api/auth";
+        private const string APIEndpoint = "/auth";
         public AuthService(IHttpClientFactory httpClient, IConfiguration configuration) : base(httpClient)
         {
         }
